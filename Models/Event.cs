@@ -13,7 +13,9 @@ namespace TakvimOdevi.Models
         public DateTime EndTime { get; set; }
 
 
-        // location = one to many relationship
+        // one to many relationships
         public virtual Location? Location { get; set; }
+
+        public virtual User User { get; set; }
     }
 }
