@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using DotNetCoreCalendar.Data;
+using TakvimOdevi.Data;
 using TakvimOdevi.Models;
 
 namespace TakvimOdevi.Controllers
@@ -7,15 +9,18 @@ namespace TakvimOdevi.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IDAL _idal;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IDAL idal)
         {
-            _logger = logger;
+           _logger = logger;
+           _idal = idal;
         }
 
         public IActionResult Index()
         {
-            return View();
+           var myEvent = _idal.GetEvents(1);
+           return View();
         }
 
         public IActionResult Privacy()
