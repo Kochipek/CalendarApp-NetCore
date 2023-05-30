@@ -10,37 +10,42 @@
 <h4>Event</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form asp-action="Edit">
             @Html.HiddenFor(m => m.UserId)
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Event.Id"/>
             <div class="form-group">
-                <label asp-for="Event.Name" class="control-label"></label>
-                <input asp-for="Event.Name" class="form-control"/>
+                <label asp-for="Event.Name" class="control-label">Name</label>
+                <input asp-for="Event.Name" class="form-control" />
                 <span asp-validation-for="Event.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Event.Description" class="control-label"></label>
-                <input asp-for="Event.Description" class="form-control"/>
+                <label asp-for="Event.Description" class="control-label">Description</label>
+                <input asp-for="Event.Description" class="form-control" />
                 <span asp-validation-for="Event.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Event.StartTime" class="control-label"></label>
-                <input asp-for="Event.StartTime" class="form-control"/>
+                <label asp-for="Event.StartTime" class="control-label">Start Time</label>
+                <input asp-for="Event.StartTime" class="form-control" />
                 <span asp-validation-for="Event.StartTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Event.EndTime" class="control-label"></label>
-                <input asp-for="Event.EndTime" class="form-control"/>
+                <label asp-for="Event.EndTime" class="control-label">End Time</label>
+                <input asp-for="Event.EndTime" class="form-control" />
                 <span asp-validation-for="Event.EndTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label>Location</label>
-                @Html.DropDownListFor(model => model.Event.Location, new SelectList(Model.Location, "Value", "Text"), "Select a Location", new { @class = "form-control" })
+                <label for="Location">Location</label>
+                <select id="Location" asp-for="Event.Location" class="form-control">
+                    <option value="">Select a Location</option>
+                    @foreach (var location in Model.Location)
+                    {
+                        <option value="@location.Value">@location.Text</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary"/>
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -48,26 +53,27 @@
 
 <script>
     function SetSelectedLocation(Location) {
-        var locations = document.getElementById('Location'), loc, i;
+        var locations = document.getElementById('Location'),
+            loc,
+            i;
         for (i = 0; i < locations.length; i++) {
             loc = locations[i];
             if (loc.innerText === Location) {
-                loc.selected = "true";
+                loc.selected = true;
             }
         }
     }
-    var eventlocation = "@Html.Raw(Model.LocationName)";
+
+    var eventLocation = "@Html.Raw(Model.LocationName)";
     document.addEventListener('DOMContentLoaded', function () {
-        SetSelectedLocation(eventlocation);
+        SetSelectedLocation(eventLocation);
     });
 </script>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    <partial name="_ValidationScriptsPartial" />
 }

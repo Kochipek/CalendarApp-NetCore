@@ -20,16 +20,93 @@
 
 </script>
 
-<div class="text-center">
-    <h1 class="display-4">Takvim Odevi</h1>
+<head>
+<title>Homepage</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .col {
+            width: 200px;
+            height: 200px;
+            margin: 0 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .col:hover {
+                transform: scale(1.05);
+                transition: transform 0.3s ease-in-out;
+            }
+
+            .col h3 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0;
+                padding: 0;
+                color: #333333;
+                text-decoration: none;
+            }
+
+        .calendar-link {
+            height: 200px;
+            display: block;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #ffffff;
+            background-color: #007bff;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+            .calendar-link:hover {
+                background-color: #0056b3;
+                color: #ffffff;
+
+            }
+
+        h1 {
+            color: #333333;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Homepage</h1>
     <div class="row">
-        <div class="col-md-6">
-            <a href="/Event"><h3>Events</h3></a>
+        <div class="col">
+            <a href="/Event">
+                <h3>Events</h3>
+            </a>
         </div>
-        <div class="col-md-6">
-            <a href="/Location"><h3>Locations</h3></a>
+        <div class="col">
+            <a href="/Location">
+                <h3>Locations</h3>
+            </a>
         </div>
     </div>
-    <a href="/MyCalendar">View My Calendar</a>
+        <a href="/MyCalendar" class="calendar-link text-center"><h3>View My Calendar</h3></a>
 </div>
-
+</body>

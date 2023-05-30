@@ -14,6 +14,8 @@ using TakvimOdevi.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using TakvimOdevi.Controllers.ActionFilters;
+
 
 namespace TakvimOdevi.Controllers
 {
@@ -84,6 +86,7 @@ namespace TakvimOdevi.Controllers
         }
 
         // GET: Event/Edit/5
+        [UserAccessOnly]
         public IActionResult Edit(int? id)
         {
             if (id == null)

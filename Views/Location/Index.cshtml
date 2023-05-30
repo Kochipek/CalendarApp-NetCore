@@ -5,20 +5,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Locations</h1>
+<h1 class="text-center">Locations</h1>
 @if (ViewData["Alert"] != null)
 {
     <h3>@ViewData["Alert"]</h3>
 }
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="mt-3">
+    <a asp-action="Create" class="btn btn-primary text-center">Create New</a>
+</div>
 <table class="table">
     <thead>
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
+        <th>Name</th>
         <th></th>
     </tr>
     </thead>
@@ -26,11 +24,9 @@
     @foreach (var item in Model)
     {
         <tr>
+            <td>@Html.DisplayFor(modelItem => item.Name)</td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Details</a>
             </td>
         </tr>
     }
