@@ -17,25 +17,25 @@ namespace TakvimOdevi.Models
         // Location ve User birden fazla nesne ile iliskilendirilecek
         public virtual Location Location { get; set; }
 
-        public virtual User User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
-        public Event(IFormCollection form, Location location)
+        public Event(IFormCollection form, Location location, ApplicationUser user)
         {
-            Id = int.Parse(form["Id"]);
-            Name = form["Name"];
-            Description = form["Description"];
-            StartTime = DateTime.Parse(form["StartTime"]);
-            EndTime = DateTime.Parse(form["EndTime"]);
+            User = user;
+            Name = form["Event.Name"].ToString();
+            Description = form["Event.Description"].ToString();
+            StartTime = DateTime.Parse(form["Event.StartTime"].ToString());
+            EndTime = DateTime.Parse(form["Event.EndTime"].ToString());
             Location = location;
         }
 
-        public void UpdateEvent(IFormCollection form, Location location)
+        public void UpdateEvent(IFormCollection form, Location location, ApplicationUser user)
         {
-            Id = int.Parse(form["Id"]);
-            Name = form["Name"];
-            Description = form["Description"];
-            StartTime = DateTime.Parse(form["StartTime"]);
-            EndTime = DateTime.Parse(form["EndTime"]);
+            User = user;
+            Name = form["Event.Name"].ToString();
+            Description = form["Event.Description"].ToString();
+            StartTime = DateTime.Parse(form["Event.StartTime"].ToString());
+            EndTime = DateTime.Parse(form["Event.EndTime"].ToString());
             Location = location;
         }
 

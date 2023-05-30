@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TakvimOdevi.Data;
+using Microsoft.EntityFrameworkCore;
 
-namespace DotNetCoreCalendar.Data
+namespace TakvimOdevi.Data
 {
     public interface IDAL
     {
-        public List<Event> GetEvents(int i);
+        public List<Event> GetEvents(int id);
         public List<Event> GetMyEvents(string userid);
         public Event GetEvent(int id);
         public void CreateEvent(IFormCollection form);
@@ -42,16 +43,21 @@ namespace DotNetCoreCalendar.Data
 
         public void CreateEvent(IFormCollection form)
         {
-            var newevent = new Event(form, db.Locations.FirstOrDefault(x => x.Name == form["Location"]));
+            var locname = form["Location"].ToString();
+            var user = db.Users.FirstOrDefault(x => x.Id == form["UserId"].ToString());
+            var newevent = new Event(form, db.Locations.FirstOrDefault(x => x.Name == locname), user);
             db.Events.Add(newevent);
             db.SaveChanges();
         }
 
         public void UpdateEvent(IFormCollection form)
         {
-            var myevent = db.Events.FirstOrDefault(x => x.Id == int.Parse(form["Id"]));
-            var location = db.Locations.FirstOrDefault(x => x.Name == form["Location"]);
-            myevent.UpdateEvent(form, location);
+            var locname = form["Location"].ToString();
+            var eventid = int.Parse(form["Event.Id"]);
+            var myevent = db.Events.FirstOrDefault(x => x.Id == eventid);
+            var location = db.Locations.FirstOrDefault(x => x.Name == locname);
+            var user = db.Users.FirstOrDefault(x => x.Id == form["UserId"].ToString());
+            myevent.UpdateEvent(form, location, user);
             db.Entry(myevent).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             db.SaveChanges();
         }

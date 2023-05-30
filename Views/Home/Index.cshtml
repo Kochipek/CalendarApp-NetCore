@@ -6,7 +6,14 @@
          document.addEventListener('DOMContentLoaded', function () {
              var calendarEl = document.getElementById('calendar');
              var calendar = new FullCalendar.Calendar(calendarEl, {
-                 initialView: 'dayGridMonth'
+                 initialView: 'dayGridMonth',
+                 events: @Html.Raw(ViewData["Events"]),
+                 resources: @Html.Raw(ViewData["Resources"]),
+                 headerToolbar: {
+                     left: 'today prev,next',
+                     center: 'title',
+                     right: 'timeGridWeek,dayGridMonth,listMonth'
+                 },
              });
              calendar.render();
          });
@@ -15,5 +22,14 @@
 
 <div class="text-center">
     <h1 class="display-4">Takvim Odevi</h1>
-    <div id='calendar'></div>
+    <div class="row">
+        <div class="col-md-6">
+            <a href="/Event"><h3>Events</h3></a>
+        </div>
+        <div class="col-md-6">
+            <a href="/Location"><h3>Locations</h3></a>
+        </div>
+    </div>
+    <a href="/MyCalendar">View My Calendar</a>
 </div>
+

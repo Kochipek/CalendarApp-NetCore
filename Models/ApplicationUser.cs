@@ -2,7 +2,7 @@
 
 namespace TakvimOdevi.Models
 {
-    public class User: IdentityUser
+    public class ApplicationUser: IdentityUser
     {
         public virtual ICollection<Event> Events { get; set; }
     }

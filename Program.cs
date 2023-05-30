@@ -1,4 +1,4 @@
-using DotNetCoreCalendar.Data;
+using TakvimOdevi.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TakvimOdevi.Data;
@@ -15,7 +15,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 // burada RequireConfirmedAccount = false yaptim cunku localde calisiyorum
 
-builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddScoped<IDAL, DAL>();
 builder.Services.AddRazorPages();
@@ -42,6 +42,11 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapControllerRoute(
+        name: "HomeActionOnly",
+        pattern: "{action}/{id?}",
+        defaults: new { controller = "Home", action = "Index" });
 
 app.MapControllerRoute(
     name: "default",
